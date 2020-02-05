@@ -18,11 +18,56 @@ h1 {
 }
 
 #main {
-  text-align: centers;
+  text-align: center;
+  display: inline;
 }
 
 .welcome {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
-  font-color: navy;
+}
+
+.username {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  width: 50%;
+  margin: 5px;
+}
+
+.password {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 20px;
+  align-content: space-around;
+}
+
+.register-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 20px;
+  align-content: space-around;
+}
+
+.register-line {
+  font-size: 14px;
+}
+
+.home-buttons {
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  text-align: center;
 }

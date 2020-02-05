@@ -38,8 +38,7 @@ class RegisterForm extends React.Component {
     this.setState(temp);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit() {
     let newObj = {};
     newObj.firstName = this.state.firstName;
     newObj.lastName = this.state.lastName;
@@ -127,7 +126,13 @@ class RegisterForm extends React.Component {
             <Button onClick={this.handleClickClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleSubmit} color="primary">
+            <Button
+              onClick={() => {
+                this.handleSubmit();
+                this.handleClickClose();
+              }}
+              color="primary"
+            >
               Register
             </Button>
           </DialogActions>

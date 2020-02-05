@@ -4,6 +4,13 @@ import BookList from "../client/components/BookList";
 import RegisterForm from "../client/components/RegisterForm";
 import AddBookForm from "../client/components/AddBookForm";
 import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 
 class App extends React.Component {
   constructor(props) {
@@ -54,8 +61,16 @@ class App extends React.Component {
         {this.state.user ? (
           <div>
             <Welcome user={this.state.user} onSignOut={this.signOut} />
-            <button onClick={this.getBooks}>List</button>
-            <AddBookForm user={this.state.user} />
+            <div class="home-buttons">
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={this.getBooks}
+              >
+                List
+              </Button>
+              <AddBookForm user={this.state.user} />
+            </div>
             {this.state.booksToDisplay.length > 0 ? (
               <div>
                 <BookList
@@ -120,15 +135,43 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSignIn}>
-          <h3>Sign in</h3>
-          <input type="text" ref="username" placeholder="enter you username" />
-          <input type="password" ref="password" placeholder="enter password" />
-          <input type="submit" value="Login" />
-        </form>
-        Don't have an account? Click <RegisterForm /> to register now!
-      </div>
+      <Container id="mainBody" component="main" maxWidth="xs">
+        <CssBaseline />
+        <div>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <form onSubmit={this.handleSignIn} noValidate>
+            <container class="input-container">
+              <input
+                class="username"
+                type="text"
+                ref="username"
+                placeholder="enter username"
+              />
+              <input
+                class="password"
+                type="password"
+                ref="password"
+                placeholder="enter password"
+              />
+            </container>
+
+            <Button type="submit" fullWidth variant="contained" color="primary">
+              Sign In
+            </Button>
+            <Grid container class="register-container">
+              {/* <Grid item>
+                Don't have an account? Click <RegisterForm /> to register now!
+              </Grid> */}
+              <span class="register-line">Don't have an account? Click</span>{" "}
+              <RegisterForm />
+              <span class="register-line">to register now!</span>
+            </Grid>
+          </form>
+        </div>
+        <Box mt={8}></Box>
+      </Container>
     );
   }
 }
