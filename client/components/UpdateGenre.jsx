@@ -7,11 +7,11 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Container } from "@material-ui/core";
 import axios from "axios";
 
-class UpdateAuthorForm extends React.Component {
+class UpdateGenreForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      updatedAuthor: "",
+      updatedGenre: "",
       open: false
     };
 
@@ -38,23 +38,23 @@ class UpdateAuthorForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     let newObj = {};
-    newObj.updatedAuthor = this.state.updatedAuthor;
-    newObj.currentAuthor = this.props.currentAuthor;
+    newObj.updatedGenre = this.state.updatedGenre;
+    newObj.currentGenre = this.props.currentGenre;
 
     axios
-      .put("/bookAuthor", newObj)
+      .put("/bookGenre", newObj)
       .then(() => {
         console.log("put req clicked here!");
         let tempObj = {
-          updatedAuthor: ""
+          updatedGenre: ""
         };
         this.setState(tempObj);
       })
       .catch(err => {
         if (err) {
-          console.log("Error updating author", err);
+          console.log("Error updating genre", err);
         } else {
-          console.log("Successfully updated author");
+          console.log("Successfully updated genre");
         }
       });
   }
@@ -79,11 +79,11 @@ class UpdateAuthorForm extends React.Component {
           <Container>
             <div>
               <TextField
-                name="updatedAuthor"
-                label="Author"
+                name="updatedGenre"
+                label="Genre"
                 margin="normal"
                 fullwidth
-                value={this.state.updatedAuthor}
+                value={this.state.updatedGenre}
                 onChange={this.handleChange}
               ></TextField>
             </div>
@@ -103,4 +103,4 @@ class UpdateAuthorForm extends React.Component {
   }
 }
 
-export default UpdateAuthorForm;
+export default UpdateGenreForm;

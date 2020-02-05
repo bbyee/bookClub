@@ -49,6 +49,7 @@ class UpdateTitleForm extends React.Component {
           updatedTitle: ""
         };
         this.setState(tempObj);
+        t;
       })
       .catch(err => {
         if (err) {

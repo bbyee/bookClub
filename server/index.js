@@ -77,6 +77,22 @@ app.put("/bookAuthor", (req, res) => {
   );
 });
 
+//PUT req to update genre
+app.put("/bookGenre", (req, res) => {
+  connection.connection.query(
+    `UPDATE booklists SET genre='${req.body.updatedGenre}' WHERE genre='${req.body.currentGenre}'`,
+    (err, results) => {
+      if (err) {
+        console.log("Error in updating genre", err);
+        res.status(500);
+      } else {
+        console.log("Successfully updated genre");
+        res.status(201);
+      }
+    }
+  );
+});
+
 //POST req to add (register) new user to DB
 app.post("/users", (req, res) => {
   connection.connection.query(

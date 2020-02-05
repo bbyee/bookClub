@@ -1,21 +1,20 @@
 import React from "react";
 import UpdateTitleForm from "./UpdateTitleForm";
 import UpdateAuthorForm from "./UpdateAuthorForm";
+import UpdateGenreForm from "./UpdateGenre";
 
 class BookEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: false
+      selected: null
     };
-
-    //bind methods here:
   }
 
   render() {
     return (
       <div>
-        <div>
+        <div class="bookEntry">
           <h3>
             Title: {this.props.book.bookTitle}{" "}
             <UpdateTitleForm
@@ -29,6 +28,7 @@ class BookEntry extends React.Component {
           </div>
           <div>
             <p>Genre: {this.props.book.genre}</p>
+            <UpdateGenreForm currentGenre={this.props.book.genre} />
           </div>
           <div>
             <p>Notes: {this.props.book.notes}</p>
