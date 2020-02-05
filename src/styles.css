@@ -1,0 +1,18 @@
+h1 {
+  color: white;
+  background-color: black;
+}
+
+.register {
+  color: green;
+  border-style: double;
+  padding: 10px;
+  margin: 5px;
+}
+
+.login {
+  color: orange;
+  border-style: dotted;
+  padding: 10px;
+  margin: 5px;
+}
