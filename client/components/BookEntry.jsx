@@ -49,7 +49,6 @@ class BookEntry extends React.Component {
                 <p>Author: {this.props.book.author}</p>
                 <UpdateAuthorForm
                   currentAuthor={this.props.book.author}
-                  getBooks={this.props.getBooks}
                   reRenderAuthor={this.props.getBooks}
                 />
               </div>
@@ -57,14 +56,14 @@ class BookEntry extends React.Component {
                 <p>Genre: {this.props.book.genre}</p>
                 <UpdateGenreForm
                   currentGenre={this.props.book.genre}
-                  getBooks={this.props.getBooks}
+                  reRenderGenre={this.props.getBooks}
                 />
               </div>
               <div>
                 <p>Notes: {this.props.book.notes}</p>
                 <UpdateNotesForm
                   currentNotes={this.props.book.notes}
-                  getBooks={this.props.getBooks}
+                  reRenderNotes={this.props.getBooks}
                 />
               </div>
               <Button

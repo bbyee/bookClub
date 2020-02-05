@@ -35,8 +35,7 @@ class UpdateGenreForm extends React.Component {
     this.setState(temp);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit() {
     let newObj = {};
     newObj.updatedGenre = this.state.updatedGenre;
     newObj.currentGenre = this.props.currentGenre;
@@ -93,7 +92,14 @@ class UpdateGenreForm extends React.Component {
             <Button onClick={this.handleClickClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleSubmit} color="primary">
+            <Button
+              onClick={() => {
+                this.handleSubmit();
+                this.props.reRenderGenre();
+                this.handleClickClose();
+              }}
+              color="primary"
+            >
               Update
             </Button>
           </DialogActions>
