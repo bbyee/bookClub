@@ -3,6 +3,7 @@ import axios from "axios";
 import BookList from "../client/components/BookList";
 import RegisterForm from "../client/components/RegisterForm";
 import AddBookForm from "../client/components/AddBookForm";
+import Button from "@material-ui/core/Button";
 
 class App extends React.Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="main">
         <h1>Book Club</h1>
         {this.state.user ? (
           <div>
@@ -74,11 +75,16 @@ class App extends React.Component {
 
 const Welcome = ({ user, onSignOut }) => {
   return (
-    <div>
-      Welcome <strong> {user.username} </strong>!
-      <a href="javascript:;" onClick={onSignOut}>
-        Sign out
-      </a>
+    <div class="welcome">
+      Welcome <strong> {user.username}</strong>!{" "}
+      <span>
+        {" "}
+        <Button variant="outlined" color="primary"ß>
+          <a href="javascript:;" onClick={onSignOut}>
+            Sign out
+          </a>
+        </Button>
+      </span>
     </div>
   );
 };

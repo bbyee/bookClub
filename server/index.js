@@ -93,6 +93,22 @@ app.put("/bookGenre", (req, res) => {
   );
 });
 
+//PUT req to update notes
+app.put("/bookNotes", (req, res) => {
+  connection.connection.query(
+    `UPDATE booklists SET notes='${req.body.updatedNotes}' WHERE notes='${req.body.currentNotes}'`,
+    (err, results) => {
+      if (err) {
+        console.log("Error in updating notes", err);
+        res.status(500);
+      } else {
+        console.log("Successfully updated notes");
+        res.status(201);
+      }
+    }
+  );
+});
+
 //POST req to add (register) new user to DB
 app.post("/users", (req, res) => {
   connection.connection.query(
