@@ -1,5 +1,6 @@
 import React from "react";
 import UpdateTitleForm from "./UpdateTitleForm";
+import UpdateAuthorForm from "./UpdateAuthorForm";
 
 class BookEntry extends React.Component {
   constructor(props) {
@@ -22,10 +23,16 @@ class BookEntry extends React.Component {
               user={this.props.user}
             />
           </h3>
-
-          <p>Author: {this.props.book.author}</p>
-          <p>Genre: {this.props.book.genre}</p>
-          <p>Notes: {this.props.book.notes}</p>
+          <div>
+            <p>Author: {this.props.book.author}</p>
+            <UpdateAuthorForm currentAuthor={this.props.book.author} />
+          </div>
+          <div>
+            <p>Genre: {this.props.book.genre}</p>
+          </div>
+          <div>
+            <p>Notes: {this.props.book.notes}</p>
+          </div>
         </div>
         <div></div>
       </div>

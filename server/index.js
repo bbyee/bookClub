@@ -46,7 +46,7 @@ app.post("/booklists/:username", (req, res) => {
 });
 
 //PUT req to update title
-app.put(`/bookTitle`, (req, res) => {
+app.put("/bookTitle", (req, res) => {
   connection.connection.query(
     `UPDATE booklists SET bookTitle='${req.body.updatedTitle}' WHERE bookTitle='${req.body.currentTitle}'`,
     (err, results) => {
@@ -55,6 +55,22 @@ app.put(`/bookTitle`, (req, res) => {
         res.status(500);
       } else {
         console.log("Success in app.put");
+        res.status(201);
+      }
+    }
+  );
+});
+
+//PUT req to update author
+app.put("/bookAuthor", (req, res) => {
+  connection.connection.query(
+    `UPDATE booklists SET author='${req.body.updatedAuthor}' WHERE author='${req.body.currentAuthor}'`,
+    (err, results) => {
+      if (err) {
+        console.log("Error in updating author", err);
+        res.status(500);
+      } else {
+        console.log("Successfully updated author");
         res.status(201);
       }
     }
