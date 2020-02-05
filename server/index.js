@@ -9,13 +9,12 @@ const bcrypt = require("bcrypt");
 //to serve up static files:
 app.use(express.static("dist"));
 
-//use middlewares
+//use middlewares:
 app.use(bodyParser.json());
 app.use(cookieParser());
 
 //GET req to retrieve book list for user
 app.get("/booklists/:username", (req, res) => {
-  console.log("req.body here", req.body);
   connection.connection.query(
     `SELECT bookTitle, author, genre, notes FROM booklists WHERE userID IN (SELECT userID FROM users WHERE username = '${req.params.username}')`,
     (err, results) => {
@@ -31,16 +30,10 @@ app.get("/booklists/:username", (req, res) => {
 });
 
 //POST req to add book to user's list
-app.post("/booklists", (req, res) => {
+app.post("/booklists/:username", (req, res) => {
   connection.connection.query(
-    "insert into booklists (bookTitle, author, genre, notes) values (?, ?, ?, ?)",
-    [
-      req.body.bookTitle,
-      req.body.author,
-      req.body.author,
-      req.body.genre,
-      req.body.notes
-    ],
+    `INSERT INTO booklists (bookTitle, author, genre, notes, userID) VALUES ('${req.body.addBookTitle}', '${req.body.addBookAuthor}', '${req.body.addBookGenre}', '${req.body.addBookNotes}', (select userID from users where username='${req.params.username}'))`,
+
     (err, results) => {
       if (err) {
         console.log("Error posting new book to list", err);
@@ -51,6 +44,11 @@ app.post("/booklists", (req, res) => {
       }
     }
   );
+});
+
+//PUT req to update details of a book already in list
+app.put("/booklists/:username", (req, res) => {
+  connection.connection.query(``)
 });
 
 //POST req to add (register) new user to DB

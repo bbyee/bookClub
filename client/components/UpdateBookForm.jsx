@@ -7,14 +7,14 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Container } from "@material-ui/core";
 import axios from "axios";
 
-class RegisterForm extends React.Component {
+class UpdateBookForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: "",
-      lastName: "",
-      username: "",
-      password: "",
+      updatedTitle: "",
+      updatedAuthor: "",
+      updatedGenre: "",
+      updatedNotes: "",
       open: false
     };
 
@@ -41,25 +41,25 @@ class RegisterForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     let newObj = {};
-    newObj.firstName = this.state.firstName;
-    newObj.lastName = this.state.lastName;
-    newObj.username = this.state.username;
-    newObj.password = this.state.password;
+    newObj.updatedTitle = this.state.updatedTitle;
+    newObj.updatedAuthor = this.state.updatedAuthor;
+    newObj.updatedGenre = this.state.updatedGenre;
+    newObj.updatedNotes = this.state.updatedNotes;
 
     axios
-      .post("/users", newObj)
+      .put(`/booklists/${this.props.user.username}`, newObj)
       .then(() => {
         let tempObj = {
-          username: "",
-          firstName: "",
-          lastName: "",
-          password: ""
+          updatedTitle: "",
+          updatedAuthor: "",
+          updatedGenre: "",
+          updatedNotes: ""
         };
         this.setState(tempObj);
-        console.log("Successfully posted new user to DB!");
+        console.log("Successfully added new book!");
       })
       .catch(err => {
-        console.log("Error in post request to users", err);
+        console.log("Error adding new book", err);
       });
   }
 
@@ -71,7 +71,7 @@ class RegisterForm extends React.Component {
           color="primary"
           onClick={this.handleClickOpen}
         >
-          HERE
+          Update
         </Button>
         <Dialog
           open={this.state.open}
@@ -79,45 +79,46 @@ class RegisterForm extends React.Component {
           onOpen={this.handleClickOpen}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Create New Account</DialogTitle>
+          <DialogTitle id="form-dialog-title">Change Book Details</DialogTitle>
           <Container>
             <div>
               <TextField
-                name="firstName"
-                label="First Name:"
+                name="updatedTitle"
+                label="Book Title"
+                placeholder={this.props.currentTitle}
                 margin="normal"
                 fullwidth
-                value={this.state.firstName}
+                value={this.state.updatedTitle}
                 onChange={this.handleChange}
               ></TextField>
             </div>
             <div>
               <TextField
-                name="lastName"
-                label="Last Name:"
+                name="updatedAuthor"
+                label="Author"
                 margin="normal"
                 fullwidth
-                value={this.state.lastName}
+                value={this.state.updatedAuthor}
                 onChange={this.handleChange}
               ></TextField>
             </div>
             <div>
               <TextField
-                name="username"
-                label="Username:"
+                name="updatedGenre"
+                label="Genre"
                 margin="normal"
                 fullwidth
-                value={this.state.username}
+                value={this.state.updatedGenre}
                 onChange={this.handleChange}
               ></TextField>
             </div>
             <div>
               <TextField
-                name="password"
-                label="Password:"
+                name="updatedNotes"
+                label="Notes"
                 margin="normal"
                 fullwidth
-                value={this.state.password}
+                value={this.state.updatedNotes}
                 onChange={this.handleChange}
               ></TextField>
             </div>
@@ -132,9 +133,11 @@ class RegisterForm extends React.Component {
                 this.handleClickClose();
                 this.handleSubmit();
               }}
+              // onClick={this.handleClickClose}
+              // onClick={this.handleSubmit}
               color="primary"
             >
-              Register
+              Update
             </Button>
           </DialogActions>
         </Dialog>
@@ -143,4 +146,4 @@ class RegisterForm extends React.Component {
   }
 }
 
-export default RegisterForm;
+export default UpdateBookForm;

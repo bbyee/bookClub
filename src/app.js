@@ -1,14 +1,8 @@
 import React from "react";
 import axios from "axios";
 import BookList from "../client/components/BookList";
-import ExForm from "../client/components/ExForm";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import RegisterForm from "../client/components/RegisterForm";
+import AddBookForm from "../client/components/AddBookForm";
 
 class App extends React.Component {
   constructor(props) {
@@ -22,7 +16,6 @@ class App extends React.Component {
     this.signOut = this.signOut.bind(this);
     this.signIn = this.signIn.bind(this);
     this.getBooks = this.getBooks.bind(this);
-    this.addBook = this.addBooks.bind(this);
   }
 
   //sign in and set state to hold username and pw
@@ -53,8 +46,6 @@ class App extends React.Component {
       });
   }
 
-  addBook() {}
-
   render() {
     return (
       <div>
@@ -63,14 +54,15 @@ class App extends React.Component {
           <div>
             <Welcome user={this.state.user} onSignOut={this.signOut} />
             <button onClick={this.getBooks}>List</button>
-            <button onClick={this.addBook}>Add Book</button>
+            <AddBookForm user={this.state.user} />
             {this.state.booksToDisplay.length > 0 ? (
               <div>
-                <BookList books={this.state.booksToDisplay} />
+                <BookList
+                  user={this.state.user}
+                  books={this.state.booksToDisplay}
+                />
               </div>
-            ) : (
-              <h2>Currently no books saved</h2>
-            )}
+            ) : null}
           </div>
         ) : (
           <LoginForm onSignIn={this.signIn} />
@@ -128,7 +120,7 @@ class LoginForm extends React.Component {
           <input type="password" ref="password" placeholder="enter password" />
           <input type="submit" value="Login" />
         </form>
-        Don't have an account? Click <ExForm /> to register now!
+        Don't have an account? Click <RegisterForm /> to register now!
       </div>
     );
   }

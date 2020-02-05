@@ -7,14 +7,14 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Container } from "@material-ui/core";
 import axios from "axios";
 
-class RegisterForm extends React.Component {
+class AddBookForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: "",
-      lastName: "",
-      username: "",
-      password: "",
+      addBookTitle: "",
+      addBookAuthor: "",
+      addBookGenre: "",
+      addBookNotes: "",
       open: false
     };
 
@@ -39,27 +39,28 @@ class RegisterForm extends React.Component {
   }
 
   handleSubmit(event) {
+    //console.log("HERHERHERHEHR", this.props.user.username);
     event.preventDefault();
     let newObj = {};
-    newObj.firstName = this.state.firstName;
-    newObj.lastName = this.state.lastName;
-    newObj.username = this.state.username;
-    newObj.password = this.state.password;
+    newObj.addBookTitle = this.state.addBookTitle;
+    newObj.addBookAuthor = this.state.addBookAuthor;
+    newObj.addBookGenre = this.state.addBookGenre;
+    newObj.addBookNotes = this.state.addBookNotes;
 
     axios
-      .post("/users", newObj)
+      .post(`/booklists/${this.props.user.username}`, newObj)
       .then(() => {
         let tempObj = {
-          username: "",
-          firstName: "",
-          lastName: "",
-          password: ""
+          addBookTitle: "",
+          addBookAuthor: "",
+          addBookGenre: "",
+          addBookNotes: ""
         };
         this.setState(tempObj);
-        console.log("Successfully posted new user to DB!");
+        console.log("Successfully added new book!");
       })
       .catch(err => {
-        console.log("Error in post request to users", err);
+        console.log("Error adding new book", err);
       });
   }
 
@@ -71,7 +72,7 @@ class RegisterForm extends React.Component {
           color="primary"
           onClick={this.handleClickOpen}
         >
-          HERE
+          Add Book
         </Button>
         <Dialog
           open={this.state.open}
@@ -79,45 +80,45 @@ class RegisterForm extends React.Component {
           onOpen={this.handleClickOpen}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Create New Account</DialogTitle>
+          <DialogTitle id="form-dialog-title">Enter Book Details</DialogTitle>
           <Container>
             <div>
               <TextField
-                name="firstName"
-                label="First Name:"
+                name="addBookTitle"
+                label="Book Title"
                 margin="normal"
                 fullwidth
-                value={this.state.firstName}
+                value={this.state.addBookTitle}
                 onChange={this.handleChange}
               ></TextField>
             </div>
             <div>
               <TextField
-                name="lastName"
-                label="Last Name:"
+                name="addBookAuthor"
+                label="Author"
                 margin="normal"
                 fullwidth
-                value={this.state.lastName}
+                value={this.state.addBookAuthor}
                 onChange={this.handleChange}
               ></TextField>
             </div>
             <div>
               <TextField
-                name="username"
-                label="Username:"
+                name="addBookGenre"
+                label="Genre"
                 margin="normal"
                 fullwidth
-                value={this.state.username}
+                value={this.state.addBookGenre}
                 onChange={this.handleChange}
               ></TextField>
             </div>
             <div>
               <TextField
-                name="password"
-                label="Password:"
+                name="addBookNotes"
+                label="Notes"
                 margin="normal"
                 fullwidth
-                value={this.state.password}
+                value={this.state.addBookNotes}
                 onChange={this.handleChange}
               ></TextField>
             </div>
@@ -134,7 +135,7 @@ class RegisterForm extends React.Component {
               }}
               color="primary"
             >
-              Register
+              Add
             </Button>
           </DialogActions>
         </Dialog>
@@ -143,4 +144,4 @@ class RegisterForm extends React.Component {
   }
 }
 
-export default RegisterForm;
+export default AddBookForm;
