@@ -39,7 +39,6 @@ class AddBookForm extends React.Component {
   }
 
   handleSubmit(event) {
-    //console.log("HERHERHERHEHR", this.props.user.username);
     event.preventDefault();
     let newObj = {};
     newObj.addBookTitle = this.state.addBookTitle;
@@ -128,13 +127,7 @@ class AddBookForm extends React.Component {
             <Button onClick={this.handleClickClose} color="primary">
               Cancel
             </Button>
-            <Button
-              onClick={() => {
-                this.handleClickClose();
-                this.handleSubmit();
-              }}
-              color="primary"
-            >
+            <Button onClick={this.handleSubmit} color="primary">
               Add
             </Button>
           </DialogActions>

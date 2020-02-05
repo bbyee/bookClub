@@ -127,13 +127,7 @@ class RegisterForm extends React.Component {
             <Button onClick={this.handleClickClose} color="primary">
               Cancel
             </Button>
-            <Button
-              onClick={() => {
-                this.handleClickClose();
-                this.handleSubmit();
-              }}
-              color="primary"
-            >
+            <Button onClick={this.handleSubmit} color="primary">
               Register
             </Button>
           </DialogActions>

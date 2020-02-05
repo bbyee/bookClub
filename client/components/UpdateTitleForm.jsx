@@ -7,14 +7,11 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Container } from "@material-ui/core";
 import axios from "axios";
 
-class UpdateBookForm extends React.Component {
+class UpdateTitleForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       updatedTitle: "",
-      updatedAuthor: "",
-      updatedGenre: "",
-      updatedNotes: "",
       open: false
     };
 
@@ -33,6 +30,7 @@ class UpdateBookForm extends React.Component {
   }
 
   handleChange(event) {
+    console.log("event in handlechange", event.target.value);
     let temp = {};
     temp[event.target.name] = event.target.value;
     this.setState(temp);
@@ -42,24 +40,19 @@ class UpdateBookForm extends React.Component {
     event.preventDefault();
     let newObj = {};
     newObj.updatedTitle = this.state.updatedTitle;
-    newObj.updatedAuthor = this.state.updatedAuthor;
-    newObj.updatedGenre = this.state.updatedGenre;
-    newObj.updatedNotes = this.state.updatedNotes;
+    newObj.currentTitle = this.props.currentTitle;
 
     axios
-      .put(`/booklists/${this.props.user.username}`, newObj)
+      .put("/bookTitle", newObj)
       .then(() => {
-        let tempObj = {
-          updatedTitle: "",
-          updatedAuthor: "",
-          updatedGenre: "",
-          updatedNotes: ""
-        };
-        this.setState(tempObj);
-        console.log("Successfully added new book!");
+        console.log("put req clicked here!");
       })
       .catch(err => {
-        console.log("Error adding new book", err);
+        if (err) {
+          console.log("Error in axios.put", err);
+        } else {
+          console.log("Success in axios.put");
+        }
       });
   }
 
@@ -85,40 +78,9 @@ class UpdateBookForm extends React.Component {
               <TextField
                 name="updatedTitle"
                 label="Book Title"
-                placeholder={this.props.currentTitle}
                 margin="normal"
                 fullwidth
                 value={this.state.updatedTitle}
-                onChange={this.handleChange}
-              ></TextField>
-            </div>
-            <div>
-              <TextField
-                name="updatedAuthor"
-                label="Author"
-                margin="normal"
-                fullwidth
-                value={this.state.updatedAuthor}
-                onChange={this.handleChange}
-              ></TextField>
-            </div>
-            <div>
-              <TextField
-                name="updatedGenre"
-                label="Genre"
-                margin="normal"
-                fullwidth
-                value={this.state.updatedGenre}
-                onChange={this.handleChange}
-              ></TextField>
-            </div>
-            <div>
-              <TextField
-                name="updatedNotes"
-                label="Notes"
-                margin="normal"
-                fullwidth
-                value={this.state.updatedNotes}
                 onChange={this.handleChange}
               ></TextField>
             </div>
@@ -128,15 +90,7 @@ class UpdateBookForm extends React.Component {
             <Button onClick={this.handleClickClose} color="primary">
               Cancel
             </Button>
-            <Button
-              onClick={() => {
-                this.handleClickClose();
-                this.handleSubmit();
-              }}
-              // onClick={this.handleClickClose}
-              // onClick={this.handleSubmit}
-              color="primary"
-            >
+            <Button onClick={this.handleSubmit} color="primary">
               Update
             </Button>
           </DialogActions>
@@ -146,4 +100,4 @@ class UpdateBookForm extends React.Component {
   }
 }
 
-export default UpdateBookForm;
+export default UpdateTitleForm;

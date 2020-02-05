@@ -33,7 +33,6 @@ app.get("/booklists/:username", (req, res) => {
 app.post("/booklists/:username", (req, res) => {
   connection.connection.query(
     `INSERT INTO booklists (bookTitle, author, genre, notes, userID) VALUES ('${req.body.addBookTitle}', '${req.body.addBookAuthor}', '${req.body.addBookGenre}', '${req.body.addBookNotes}', (select userID from users where username='${req.params.username}'))`,
-
     (err, results) => {
       if (err) {
         console.log("Error posting new book to list", err);
@@ -46,15 +45,26 @@ app.post("/booklists/:username", (req, res) => {
   );
 });
 
-//PUT req to update details of a book already in list
-app.put("/booklists/:username", (req, res) => {
-  connection.connection.query(``)
+//PUT req to update title
+app.put(`/bookTitle`, (req, res) => {
+  connection.connection.query(
+    `UPDATE booklists SET bookTitle='${req.body.updatedTitle}' WHERE bookTitle='${req.body.currentTitle}'`,
+    (err, results) => {
+      if (err) {
+        console.log("Error in app.put", err);
+        res.status(500);
+      } else {
+        console.log("Success in app.put");
+        res.status(201);
+      }
+    }
+  );
 });
 
 //POST req to add (register) new user to DB
 app.post("/users", (req, res) => {
   connection.connection.query(
-    "insert into users (username, firstName, lastName, password) values (?, ?, ?, ?)",
+    "INSERT INTO users (username, firstName, lastName, password) VALUES (?, ?, ?, ?)",
     [
       req.body.username,
       req.body.firstName,

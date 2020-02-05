@@ -1,5 +1,5 @@
 import React from "react";
-import UpdateBookForm from "./UpdateBookForm";
+import UpdateTitleForm from "./UpdateTitleForm";
 
 class BookEntry extends React.Component {
   constructor(props) {
@@ -15,17 +15,19 @@ class BookEntry extends React.Component {
     return (
       <div>
         <div>
-          <h3>Title: {this.props.book.bookTitle}</h3>
+          <h3>
+            Title: {this.props.book.bookTitle}{" "}
+            <UpdateTitleForm
+              currentTitle={this.props.book.bookTitle}
+              user={this.props.user}
+            />
+          </h3>
+
           <p>Author: {this.props.book.author}</p>
           <p>Genre: {this.props.book.genre}</p>
           <p>Notes: {this.props.book.notes}</p>
         </div>
-        <div>
-          <UpdateBookForm
-            currentTitle={this.props.book.bookTitle}
-            user={this.props.user}
-          />
-        </div>
+        <div></div>
       </div>
     );
   }
