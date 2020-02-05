@@ -109,6 +109,22 @@ app.put("/bookNotes", (req, res) => {
   );
 });
 
+//DELETE req to delete book
+app.delete("/booklists/:bookTitle", (req, res) => {
+  connection.connection.query(
+    `DELETE FROM booklists WHERE bookTitle='${req.params.bookTitle}'`,
+    (err, results) => {
+      if (err) {
+        console.log("Error deleting book", err);
+        res.status(500);
+      } else {
+        console.log("Successfully deleted book");
+        res.status(200);
+      }
+    }
+  );
+});
+
 //POST req to add (register) new user to DB
 app.post("/users", (req, res) => {
   connection.connection.query(

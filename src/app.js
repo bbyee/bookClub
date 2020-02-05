@@ -59,6 +59,7 @@ class App extends React.Component {
             {this.state.booksToDisplay.length > 0 ? (
               <div>
                 <BookList
+                  getBooks={this.getBooks}
                   user={this.state.user}
                   books={this.state.booksToDisplay}
                 />
@@ -79,7 +80,7 @@ const Welcome = ({ user, onSignOut }) => {
       Welcome <strong> {user.username}</strong>!{" "}
       <span>
         {" "}
-        <Button variant="outlined" color="primary"ß>
+        <Button variant="outlined" color="primary" ß>
           <a href="javascript:;" onClick={onSignOut}>
             Sign out
           </a>

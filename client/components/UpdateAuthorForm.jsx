@@ -35,8 +35,7 @@ class UpdateAuthorForm extends React.Component {
     this.setState(temp);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit() {
     let newObj = {};
     newObj.updatedAuthor = this.state.updatedAuthor;
     newObj.currentAuthor = this.props.currentAuthor;
@@ -93,7 +92,14 @@ class UpdateAuthorForm extends React.Component {
             <Button onClick={this.handleClickClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleSubmit} color="primary">
+            <Button
+              onClick={() => {
+                this.handleSubmit();
+                this.props.reRenderAuthor();
+                this.handleClickClose();
+              }}
+              color="primary"
+            >
               Update
             </Button>
           </DialogActions>

@@ -7,7 +7,9 @@ const BookList = props => {
   return (
     <div>
       {props.books.map(book => {
-        return <BookEntry user={props.user} book={book} />;
+        return (
+          <BookEntry getBooks={props.getBooks} user={props.user} book={book} />
+        );
       })}
     </div>
   );

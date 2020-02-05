@@ -35,8 +35,11 @@ class UpdateTitleForm extends React.Component {
     this.setState(temp);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit() {
+    // console.log(
+    //   "this.props.reRenderTitle in handlesubmit",
+    //   this.props.reRenderTitle
+    // );
     let newObj = {};
     newObj.updatedTitle = this.state.updatedTitle;
     newObj.currentTitle = this.props.currentTitle;
@@ -49,7 +52,6 @@ class UpdateTitleForm extends React.Component {
           updatedTitle: ""
         };
         this.setState(tempObj);
-        t;
       })
       .catch(err => {
         if (err) {
@@ -94,7 +96,14 @@ class UpdateTitleForm extends React.Component {
             <Button onClick={this.handleClickClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleSubmit} color="primary">
+            <Button
+              onClick={() => {
+                this.handleSubmit();
+                this.props.reRenderTitle();
+                this.handleClickClose();
+              }}
+              color="primary"
+            >
               Update
             </Button>
           </DialogActions>
