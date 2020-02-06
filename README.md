@@ -44,7 +44,7 @@ In your browser, go to localhost:3000 to see the app and use it.
 
 ## Deployment
 
-Currently unable to be deployed due to AWS account issues that are still being sorted out with Amazon's customer service..
+Currently unable to be deployed due to AWS account issues that are still being sorted out :(
 
 ## Built With
 
