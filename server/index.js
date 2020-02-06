@@ -3,17 +3,14 @@ const app = express();
 const port = 3000;
 const connection = require("../database/index.js");
 const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const bcrypt = require("bcrypt");
 
 //to serve up static files:
 app.use(express.static("dist"));
 
 //use middlewares:
 app.use(bodyParser.json());
-app.use(cookieParser());
 
-//GET req to retrieve book list for user
+//GET req to retrieve book list for user from DB:
 app.get("/booklists/:username", (req, res) => {
   connection.connection.query(
     `SELECT bookTitle, author, genre, notes FROM booklists WHERE userID IN (SELECT userID FROM users WHERE username = '${req.params.username}')`,
@@ -29,7 +26,7 @@ app.get("/booklists/:username", (req, res) => {
   );
 });
 
-//POST req to add book to user's list
+//POST req to add book to user's list in DB:
 app.post("/booklists/:username", (req, res) => {
   connection.connection.query(
     `INSERT INTO booklists (bookTitle, author, genre, notes, userID) VALUES ('${req.body.addBookTitle}', '${req.body.addBookAuthor}', '${req.body.addBookGenre}', '${req.body.addBookNotes}', (select userID from users where username='${req.params.username}'))`,
@@ -45,7 +42,7 @@ app.post("/booklists/:username", (req, res) => {
   );
 });
 
-//PUT req to update title
+//PUT req to update title:
 app.put("/bookTitle", (req, res) => {
   connection.connection.query(
     `UPDATE booklists SET bookTitle='${req.body.updatedTitle}' WHERE bookTitle='${req.body.currentTitle}'`,
@@ -61,7 +58,7 @@ app.put("/bookTitle", (req, res) => {
   );
 });
 
-//PUT req to update author
+//PUT req to update author:
 app.put("/bookAuthor", (req, res) => {
   connection.connection.query(
     `UPDATE booklists SET author='${req.body.updatedAuthor}' WHERE author='${req.body.currentAuthor}'`,
@@ -77,7 +74,7 @@ app.put("/bookAuthor", (req, res) => {
   );
 });
 
-//PUT req to update genre
+//PUT req to update genre:
 app.put("/bookGenre", (req, res) => {
   connection.connection.query(
     `UPDATE booklists SET genre='${req.body.updatedGenre}' WHERE genre='${req.body.currentGenre}'`,
@@ -93,7 +90,7 @@ app.put("/bookGenre", (req, res) => {
   );
 });
 
-//PUT req to update notes
+//PUT req to update notes:
 app.put("/bookNotes", (req, res) => {
   connection.connection.query(
     `UPDATE booklists SET notes='${req.body.updatedNotes}' WHERE notes='${req.body.currentNotes}'`,
@@ -109,7 +106,7 @@ app.put("/bookNotes", (req, res) => {
   );
 });
 
-//DELETE req to delete book
+//DELETE req to delete book:
 app.delete("/booklists/:bookTitle", (req, res) => {
   connection.connection.query(
     `DELETE FROM booklists WHERE bookTitle='${req.params.bookTitle}'`,
@@ -125,7 +122,7 @@ app.delete("/booklists/:bookTitle", (req, res) => {
   );
 });
 
-//POST req to add (register) new user to DB
+//POST req to add (register) new user to DB:
 app.post("/users", (req, res) => {
   connection.connection.query(
     "INSERT INTO users (username, firstName, lastName, password) VALUES (?, ?, ?, ?)",

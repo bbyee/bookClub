@@ -6,11 +6,11 @@ import AddBookForm from "../client/components/AddBookForm";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+
+//Parent Component (the whole App)!
 
 class App extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class App extends React.Component {
     this.getBooks = this.getBooks.bind(this);
   }
 
-  //sign in and set state to hold username and pw
+  //sign in and set state to hold username and pw:
   signIn(username, password) {
     this.setState({
       user: {
@@ -36,11 +36,12 @@ class App extends React.Component {
     });
   }
 
-  // resets state back to null
+  // resets state back to null when user signs out:
   signOut() {
     this.setState({ user: null, booksToDisplay: [] });
   }
 
+  //GET req to pull book list for signed in user:
   getBooks() {
     axios
       .get(`/booklists/${this.state.user.username}`)
@@ -57,7 +58,7 @@ class App extends React.Component {
   render() {
     return (
       <div id="main">
-        <h1>Book Club</h1>
+        <h1 class="header">Book Club</h1>
         {this.state.user ? (
           <div>
             <Welcome user={this.state.user} onSignOut={this.signOut} />
@@ -82,13 +83,14 @@ class App extends React.Component {
             ) : null}
           </div>
         ) : (
-          <LoginForm onSignIn={this.signIn} />
+          <LoginForm getBooks={this.getBooks} onSignIn={this.signIn} />
         )}
       </div>
     );
   }
 }
 
+//Little component to display welcome message and signout button for user
 const Welcome = ({ user, onSignOut }) => {
   return (
     <div class="welcome">
@@ -104,6 +106,8 @@ const Welcome = ({ user, onSignOut }) => {
     </div>
   );
 };
+
+//Component that handles the login information:
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -161,11 +165,8 @@ class LoginForm extends React.Component {
               Sign In
             </Button>
             <Grid container class="register-container">
-              {/* <Grid item>
-                Don't have an account? Click <RegisterForm /> to register now!
-              </Grid> */}
               <span class="register-line">Don't have an account? Click</span>{" "}
-              <RegisterForm />
+              <RegisterForm getBooks={this.props.getBooks} />
               <span class="register-line">to register now!</span>
             </Grid>
           </form>

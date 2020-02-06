@@ -3,12 +3,18 @@ import UpdateTitleForm from "./UpdateTitleForm";
 import UpdateAuthorForm from "./UpdateAuthorForm";
 import UpdateGenreForm from "./UpdateGenre";
 import UpdateNotesForm from "./UpdateNotes";
-import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+
+/*
+Component responsible for rendering a single book entry within the list.
+Material UI used to style the papers which hold each entry.
+Each part of the Book details can be updated through their own pop-up form.
+
+*/
 
 class BookEntry extends React.Component {
   constructor(props) {

@@ -7,6 +7,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Container } from "@material-ui/core";
 import axios from "axios";
 
+//Form component lets users submit an update to any of the book details.
+
 class UpdateAuthorForm extends React.Component {
   constructor(props) {
     super(props);
@@ -35,6 +37,7 @@ class UpdateAuthorForm extends React.Component {
     this.setState(temp);
   }
 
+  //Makes PUT req to update the author
   handleSubmit() {
     let newObj = {};
     newObj.updatedAuthor = this.state.updatedAuthor;
@@ -109,4 +112,10 @@ class UpdateAuthorForm extends React.Component {
   }
 }
 
+/*When the 'Update' button is clicked, it will submit the information to update into
+the database, and also trigger a re-render to grab the newest changes and display it on the page
+as if it were refreshed.
+
+This is the same for any of the Update form components.
+*/
 export default UpdateAuthorForm;

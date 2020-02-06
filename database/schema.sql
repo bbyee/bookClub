@@ -1,3 +1,8 @@
+/*  Execute this file from the command line by typing:
+ *    mysql -u root < database/schema.sql
+ *  to create the database and the tables.*/
+
+
 CREATE DATABASE IF NOT EXISTS bookClub;
 
 USE bookClub;
@@ -21,3 +26,4 @@ CREATE TABLE booklists (
   primary key (bookNumber),
   foreign key (userId) REFERENCES users(userID)
 );
+

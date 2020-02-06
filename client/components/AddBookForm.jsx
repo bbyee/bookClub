@@ -7,6 +7,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Container } from "@material-ui/core";
 import axios from "axios";
 
+//Component for the form to add new books once you're signed in
+
 class AddBookForm extends React.Component {
   constructor(props) {
     super(props);
@@ -18,12 +20,14 @@ class AddBookForm extends React.Component {
       open: false
     };
 
+    //bind methods here:
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClickClose = this.handleClickClose.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  //handleClickOpen and handleClickClose control the form's open and closed state:
   handleClickOpen() {
     this.setState({ open: true });
   }
@@ -38,6 +42,7 @@ class AddBookForm extends React.Component {
     this.setState(temp);
   }
 
+  //handleSubmit makes the axios request to post a new book to the database:
   handleSubmit() {
     let newObj = {};
     newObj.addBookTitle = this.state.addBookTitle;

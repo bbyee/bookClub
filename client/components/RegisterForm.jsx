@@ -7,6 +7,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Container } from "@material-ui/core";
 import axios from "axios";
 
+//Component allows new users to create a new account
+
 class RegisterForm extends React.Component {
   constructor(props) {
     super(props);
@@ -129,6 +131,7 @@ class RegisterForm extends React.Component {
             <Button
               onClick={() => {
                 this.handleSubmit();
+                this.props.getBooks();
                 this.handleClickClose();
               }}
               color="primary"
