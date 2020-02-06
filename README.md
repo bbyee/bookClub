@@ -35,7 +35,7 @@ otherwise:
 
 To get the database started, run the following command in your terminal:
 
--`mysql -u root < database/schema.sql`
+- `mysql -u root < database/schema.sql`
 
 This command will generate the database and relevant tables.
 
