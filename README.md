@@ -39,7 +39,7 @@ To get the database started, run the following command in your terminal:
 
 This command will generate the database and relevant tables.
 
-In your browser, go to localhost:3000 to see the app and use it.
+In your browser, go to localhost:3000 to register a new account to begin using BookClub!
 
 
 ## Deployment
