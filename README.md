@@ -1,4 +1,4 @@
-# Origin Full Stack Assessment
+# Origin Full Stack App
 
 BookClub App
 
