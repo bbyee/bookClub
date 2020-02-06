@@ -34,7 +34,7 @@ class BookEntry extends React.Component {
   render() {
     return (
       <div>
-        <Paper>
+        <Paper elevation={7}>
           <Typography variant="h6" component="h5" elevation={7}>
             <div class="bookEntry">
               <h3>
@@ -46,36 +46,44 @@ class BookEntry extends React.Component {
                 />
               </h3>
               <div>
-                <p>Author: {this.props.book.author}</p>
+                <p>
+                  <strong>Author:</strong> {this.props.book.author}
+                </p>
                 <UpdateAuthorForm
                   currentAuthor={this.props.book.author}
                   reRenderAuthor={this.props.getBooks}
                 />
               </div>
               <div>
-                <p>Genre: {this.props.book.genre}</p>
+                <p>
+                  <strong>Genre:</strong> {this.props.book.genre}
+                </p>
                 <UpdateGenreForm
                   currentGenre={this.props.book.genre}
                   reRenderGenre={this.props.getBooks}
                 />
               </div>
               <div>
-                <p>Notes: {this.props.book.notes}</p>
+                <p>
+                  <strong>Notes:</strong> {this.props.book.notes}
+                </p>
                 <UpdateNotesForm
                   currentNotes={this.props.book.notes}
                   reRenderNotes={this.props.getBooks}
                 />
               </div>
-              <Button
-                onClick={() => {
-                  this.handleDelete();
-                  this.props.getBooks();
-                }}
-                variant="outlined"
-                color="primary"
-              >
-                Delete Entry
-              </Button>
+              <div class="delete-button">
+                <Button
+                  onClick={() => {
+                    this.handleDelete();
+                    this.props.getBooks();
+                  }}
+                  variant="outlined"
+                  color="primary"
+                >
+                  Delete Entry
+                </Button>
+              </div>
             </div>
           </Typography>
         </Paper>

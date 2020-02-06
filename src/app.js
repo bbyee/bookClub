@@ -69,7 +69,7 @@ class App extends React.Component {
               >
                 List
               </Button>
-              <AddBookForm user={this.state.user} />
+              <AddBookForm getBooks={this.getBooks} user={this.state.user} />
             </div>
             {this.state.booksToDisplay.length > 0 ? (
               <div>

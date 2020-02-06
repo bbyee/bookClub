@@ -71,3 +71,16 @@ h1 {
   display: flex;
   text-align: center;
 }
+
+.bookEntry {
+  margin: 5px;
+}
+
+h3 {
+  margin: 3px;
+  padding: 5px;
+}
+
+.delete-button {
+  padding: 5px;
+}
