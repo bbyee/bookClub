@@ -2,7 +2,7 @@
  *    mysql -u root < database/schema.sql
  *  to create the database and the tables.*/
 
-
+DROP DATABASE  IF EXISTS bookClub;
 CREATE DATABASE IF NOT EXISTS bookClub;
 
 USE bookClub;
